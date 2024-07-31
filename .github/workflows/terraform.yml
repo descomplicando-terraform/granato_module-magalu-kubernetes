@@ -21,8 +21,8 @@ jobs:
       with:
         terraform_version: 1.9.3  # Especifica a versão do Terraform
 
-    - name: Install Graphviz
-      run: sudo apt-get update && sudo apt-get install -y graphviz
+#    - name: Install Graphviz
+#      run: sudo apt-get update && sudo apt-get install -y graphviz
 
     - name: Terraform Init
       run: terraform init --upgrade
@@ -33,9 +33,6 @@ jobs:
     - name: Terraform Validate
       run: terraform validate
 
-    - name: Terraform Graph
-      run: terraform graph | tee graph.dot | dot -T png > graph.png
-
     - name: Terraform Test
       run: terraform test  # Certifique-se de que o comando 'terraform test' está disponível no seu contexto
 
@@ -43,7 +40,7 @@ jobs:
       run: terraform plan -out=tfplan
 
     - name: Terraform Graph
-      run: terraform graph | tee graph.dot | dot -T png > graph.png
+      run: terraform graph | tee graph.dot | dot -Tpng > graph.png
 
     - name: Upload Terraform Graph
       uses: actions/upload-artifact@v3
