@@ -1,0 +1,44 @@
+name: Terraform Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    - name: Terraform Init
+      run: terraform init --upgrade
+
+    - name: Terraform Format
+      run: terraform fmt -check
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Graph
+      run: terraform graph | tee graph.dot | dot -T png > graph.png
+
+    - name: Terraform Test
+      run: terraform test  # Certifique-se de que o comando 'terraform test' está disponível no seu contexto
+
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan
+      
+    - name: Upload Terraform Graph
+      uses: actions/upload-artifact@v3
+      with:
+        name: terraform-graph
+        path: graph.png
