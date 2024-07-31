@@ -1,0 +1,1 @@
+# granato_iac-mgc-kubernetes
