@@ -1,0 +1,36 @@
+name: Generate Graph
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setup Terramaid
+      run: |
+        # Baixar o arquivo
+        wget https://github.com/RoseSecurity/Terramaid/releases/download/v1.6.3/Terramaid_Linux_x86_64.tar.gz
+        
+        # Verificar se o arquivo foi baixado
+        ls -l Terramaid_Linux_x86_64.tar.gz
+        
+        # Descompactar o arquivo
+        tar -xzvf Terramaid_Linux_x86_64.tar.gz -C /tmp
+        
+        # Verificar se o diretório /tmp/Terramaid foi criado
+        ls -l /tmp/Terramaid
+        
+        # Mover o arquivo para /usr/local/bin e tornar executável
+        mv -v /tmp/Terramaid /usr/local/bin/terramaid
+        chmod +x /usr/local/bin/terramaid
+
+        terramaid
+
+
+

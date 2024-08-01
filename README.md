@@ -1,8 +1,25 @@
 # terraform-mgc-k8s-module
 
-[![tfsec](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/tfscan.yml/badge.svg)](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/tfscan.yml) [![Dependabot Updates](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/dependabot/dependabot-updates) [![Generate terraform docs](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/documentation.yml/badge.svg)](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/documentation.yml) [![.github/workflows/terrascan.yml](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/terrascan.yml/badge.svg)](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/terrascan.yml)
-
+[![Terraform Workflow](https://github.com/nataliagranato/granato_iac-magalu-kubernetes/actions/workflows/terraform.yml/badge.svg)](https://github.com/nataliagranato/granato_iac-magalu-kubernetes/actions/workflows/terraform.yml) [![Verify Terraform code with tfsec](https://github.com/nataliagranato/granato_iac-magalu-kubernetes/actions/workflows/tfscan.yml/badge.svg)](https://github.com/nataliagranato/granato_iac-magalu-kubernetes/actions/workflows/tfscan.yml)
 <!-- BEGIN_TF_DOCS -->
+
+```mermaid
+flowchart TD;
+	subgraph Terraform
+		data.mgc_kubernetes_cluster_kubeconfig.cluster["data.mgc_kubernetes_cluster_kubeconfig.cluster"]
+		local_file.kubeconfig["local_file.kubeconfig"]
+		mgc_kubernetes_cluster.cluster_with_nodepool["mgc_kubernetes_cluster.cluster_with_nodepool"]
+		mgc_kubernetes_nodepool.gp1_small["mgc_kubernetes_nodepool.gp1_small"]
+		time_sleep.wait_15_minutes["time_sleep.wait_15_minutes"]
+		time_sleep.wait_for_cluster["time_sleep.wait_for_cluster"]
+		data.mgc_kubernetes_cluster_kubeconfig.cluster --> time_sleep.wait_for_cluster
+		local_file.kubeconfig --> data.mgc_kubernetes_cluster_kubeconfig.cluster
+		mgc_kubernetes_nodepool.gp1_small --> time_sleep.wait_15_minutes
+		time_sleep.wait_15_minutes --> mgc_kubernetes_cluster.cluster_with_nodepool
+		time_sleep.wait_for_cluster --> mgc_kubernetes_cluster.cluster_with_nodepool
+	end
+```
+
 ## Requirements
 
 | Name | Version |
