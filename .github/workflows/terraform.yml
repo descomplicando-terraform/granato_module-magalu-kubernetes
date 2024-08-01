@@ -23,8 +23,14 @@ jobs:
     - name: Terraform Init
       run: terraform init --upgrade
 
-    - name: Generate Terraform Graph
-      run: terraform graph | dot -Tpng > graph.png
+    - name: Generate Terraform Graph DOT file
+      run: terraform graph > graph.dot
+
+    - name: Check DOT file content
+      run: cat graph.dot
+
+    - name: Convert DOT to PNG
+      run: dot -Tpng graph.dot -o graph.png
 
     - name: Upload Terraform Graph
       uses: actions/upload-artifact@v3
