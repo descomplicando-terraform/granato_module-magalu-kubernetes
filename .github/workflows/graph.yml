@@ -30,7 +30,7 @@ jobs:
         mv -v /tmp/Terramaid /usr/local/bin/terramaid
         chmod +x /usr/local/bin/terramaid
 
-        terramaid --version
+        terramaid
 
 
 
