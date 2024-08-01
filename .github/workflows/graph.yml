@@ -13,18 +13,30 @@ jobs:
 
     steps:
     - name: Setup Terramaid
-      run: | 
+      run: |
+        # Baixar o arquivo
         wget https://github.com/RoseSecurity/Terramaid/releases/download/v1.6.3/Terramaid_Linux_x86_64.tar.gz
-        tar -xzvf /tmp/Terramaid_Linux_x86_64.tar.gz -C /tmp
+        
+        # Verificar se o arquivo foi baixado
+        ls -l Terramaid_Linux_x86_64.tar.gz
+        
+        # Descompactar o arquivo
+        tar -xzvf Terramaid_Linux_x86_64.tar.gz -C /tmp
+        
+        # Verificar se o diretório /tmp/Terramaid foi criado
+        ls -l /tmp/Terramaid
+        
+        # Mover o arquivo para /usr/local/bin e tornar executável
         mv -v /tmp/Terramaid /usr/local/bin/terramaid
         chmod +x /usr/local/bin/terramaid
 
-        - name: Init
-          run: terraform init --upgrade
-        
-        - name: Plan
-          run: terraform plan -out=plan.out
+    - name: Init
+      run: terraform init --upgrade
 
-        - name: Terramaid
-          run: terramaid 
+    - name: Plan
+      run: terraform plan -out=plan.out
+
+    - name: Terramaid
+      run: terramaid
+
 
