@@ -30,18 +30,7 @@ jobs:
         mv -v /tmp/Terramaid /usr/local/bin/terramaid
         chmod +x /usr/local/bin/terramaid
 
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.9.3
-        
-    - name: Init
-      run: terraform init --upgrade
+        terramaid --version
 
-    - name: Plan
-      run: terraform plan 
-
-    - name: Terramaid
-      run: terramaid
 
 
