@@ -1,7 +1,6 @@
 # terraform-mgc-k8s-module
 
-[![tfsec](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/tfscan.yml/badge.svg)](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/tfscan.yml) [![Dependabot Updates](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/dependabot/dependabot-updates) [![Generate terraform docs](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/documentation.yml/badge.svg)](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/documentation.yml) [![.github/workflows/terrascan.yml](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/terrascan.yml/badge.svg)](https://github.com/nataliagranato/terraform-mgc-k8s-module/actions/workflows/terrascan.yml)
-
+[![Terraform Workflow](https://github.com/nataliagranato/granato_iac-magalu-kubernetes/actions/workflows/terraform.yml/badge.svg)](https://github.com/nataliagranato/granato_iac-magalu-kubernetes/actions/workflows/terraform.yml) [![Verify Terraform code with tfsec](https://github.com/nataliagranato/granato_iac-magalu-kubernetes/actions/workflows/tfscan.yml/badge.svg)](https://github.com/nataliagranato/granato_iac-magalu-kubernetes/actions/workflows/tfscan.yml)
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
