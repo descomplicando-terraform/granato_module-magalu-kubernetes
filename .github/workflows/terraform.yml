@@ -1,12 +1,8 @@
 name: Terraform Workflow
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  schedule:
+    - cron: '0 9 * * *'
 
 jobs:
   terraform:
@@ -27,20 +23,8 @@ jobs:
     - name: Terraform Init
       run: terraform init --upgrade
 
-    - name: Terraform Format
-      run: terraform fmt -check
-
-    - name: Terraform Validate
-      run: terraform validate
-
-    - name: Terraform Test
-      run: terraform test  # Certifique-se de que o comando 'terraform test' está disponível no seu contexto
-
-    - name: Terraform Plan
-      run: terraform plan -out=tfplan
-
-    - name: Terraform Graph
-      run: terraform graph | tee graph.dot | dot -Tpng > graph.png
+    - name: Generate Terraform Graph
+      run: terraform graph | dot -Tpng > graph.png
 
     - name: Upload Terraform Graph
       uses: actions/upload-artifact@v3
