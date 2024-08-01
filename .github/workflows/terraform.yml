@@ -1,8 +1,12 @@
 name: Terraform Workflow
 
 on:
-  schedule:
-    - cron: '0 9 * * *'
+    push:
+      branches: [ "main" ] # Executa quando um commit é feito na branch main
+    pull_request:
+      branches: [ "main" ] # Executa quando um pull request é aberto na branch main
+    schedule:
+      - cron: '0 9 * * *' # Executa todos os dias às 9h UTC
 
 jobs:
   terraform:
