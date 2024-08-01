@@ -1,0 +1,15 @@
+digraph G {
+  rankdir = "RL";
+  node [shape = rect, fontname = "sans-serif"];
+  "data.mgc_kubernetes_cluster_kubeconfig.cluster" [label="data.mgc_kubernetes_cluster_kubeconfig.cluster"];
+  "local_file.kubeconfig" [label="local_file.kubeconfig"];
+  "mgc_kubernetes_cluster.cluster_with_nodepool" [label="mgc_kubernetes_cluster.cluster_with_nodepool"];
+  "mgc_kubernetes_nodepool.gp1_small" [label="mgc_kubernetes_nodepool.gp1_small"];
+  "time_sleep.wait_15_minutes" [label="time_sleep.wait_15_minutes"];
+  "time_sleep.wait_for_cluster" [label="time_sleep.wait_for_cluster"];
+  "data.mgc_kubernetes_cluster_kubeconfig.cluster" -> "time_sleep.wait_for_cluster";
+  "local_file.kubeconfig" -> "data.mgc_kubernetes_cluster_kubeconfig.cluster";
+  "mgc_kubernetes_nodepool.gp1_small" -> "time_sleep.wait_15_minutes";
+  "time_sleep.wait_15_minutes" -> "mgc_kubernetes_cluster.cluster_with_nodepool";
+  "time_sleep.wait_for_cluster" -> "mgc_kubernetes_cluster.cluster_with_nodepool";
+}
