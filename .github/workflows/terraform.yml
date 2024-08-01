@@ -1,12 +1,12 @@
 name: Terraform Workflow
 
 on:
-    push:
-      branches: [ "main" ] # Executa quando um commit é feito na branch main
-    pull_request:
-      branches: [ "main" ] # Executa quando um pull request é aberto na branch main
-    schedule:
-      - cron: '0 9 * * *' # Executa todos os dias às 9h UTC
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   terraform:
@@ -19,25 +19,16 @@ jobs:
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v2
       with:
-        terraform_version: 1.9.3  # Especifica a versão do Terraform
-
-    - name: Install Graphviz
-      run: sudo apt-get update && sudo apt-get install -y graphviz
+        terraform_version: 1.9.3
 
     - name: Terraform Init
       run: terraform init --upgrade
 
-    - name: Generate Terraform Graph DOT file
-      run: terraform graph > graph.dot
+    - name: Terraform Format
+      run: terraform fmt -check
 
-    - name: Check DOT file content
-      run: cat graph.dot
+    - name: Terraform Validate
+      run: terraform validate
 
-    - name: Convert DOT to PNG
-      run: dot -Tpng graph.dot -o graph.png
-
-    - name: Upload Terraform Graph
-      uses: actions/upload-artifact@v3
-      with:
-        name: terraform-graph
-        path: graph.png
+    - name: Terraform Test
+      run: terraform test 
