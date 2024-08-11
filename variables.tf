@@ -39,3 +39,23 @@ variable "timer_duration" {
   type        = string
   default     = "15m"
 }
+
+variable "mgc_api_key" {
+  type = string
+  description = "Chave da Magalu Cloud"
+}
+
+variable "mgc_obj_key_id" {
+  type = string
+  description = "ID da Chave do Object Storage"
+}
+
+variable "mgc_obj_key_secret" {
+  type = string
+  description = "Secret da Chave do Object Storage"
+}
+
+variable "mgc_region" {
+  type = string
+  description = "Região da Magalu Cloud"
+}
