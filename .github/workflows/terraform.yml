@@ -1,4 +1,4 @@
-name: Terraform Workflow - Format, Validate, and Test
+name: Terraform Format, Validate, and Test
 
 on:
   push:
@@ -21,6 +21,9 @@ jobs:
       with:
         terraform_version: 1.9.3
 
+    - name: Terraform Init
+      run: terraform init
+
     - name: Terraform Format
       run: terraform fmt
 
@@ -28,4 +31,4 @@ jobs:
       run: terraform validate
 
     - name: Terraform Test
-      run: terraform test 
+      run: terraform test

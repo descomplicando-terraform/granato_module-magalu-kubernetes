@@ -20,10 +20,11 @@ jobs:
 
     - name: Install mgcli
       run: |
-        mkdir -p ~/mgc_cli
-        wget https://github.com/MagaluCloud/mgccli/releases/download/v0.23.0/mgccli_0.23.0_linux_amd64.tar.gz
-        tar -xvf mgccli_0.23.0_linux_amd64.tar.gz -C ~/mgc_cli
-        echo "$HOME/mgc_cli" >> $GITHUB_ENV  # Adiciona o diretório ao PATH global do GitHub Actions
+          mkdir -p ~/mgc_cli
+          wget https://github.com/MagaluCloud/mgccli/releases/download/v0.23.0/mgccli_0.23.0_linux_amd64.tar.gz
+          tar -xvf mgccli_0.23.0_linux_amd64.tar.gz -C ~/mgc_cli
+          echo "MGCLI_PATH=$HOME/mgc_cli" >> $GITHUB_ENV
+          echo "$HOME/mgc_cli" >> $GITHUB_PATH
 
     - name: Export PATH
       run: echo "PATH=$HOME/mgc_cli:$PATH" >> $GITHUB_ENV
