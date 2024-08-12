@@ -1,0 +1,19 @@
+
+
+services:
+  mgcli:
+    container_name: mgcli
+    image: registry-local/mgcli:0.0.1
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    tty: true
+    ports:
+      - "8095:8095"
+    volumes:
+      - ./:/app
+    environment: 
+      - TF_VAR_mgc_api_key= #https://id.magalu.com/basic-information
+      - TF_VAR_mgc_obj_key_id=
+      - TF_VAR_mgc_obj_key_secret=
+      - TF_VAR_mgc_region=
