@@ -38,21 +38,17 @@ jobs:
     - name: Set Terraform Environment Variables
       run: echo "TF_VAR_mgc_region=${{ secrets.MGC_REGION }}" >> $GITHUB_ENV
 
-    - name: Terraform Init
-      run: terraform init
+#    - name: Terraform Init
+#      run: terraform init
 
-    - name: Terraform Plan
-      id: plan
-      run: terraform plan -out=tfplan
+#    - name: Terraform Plan
+#      id: plan
+#      run: terraform plan -out=tfplan
 
-    - name: Terraform Apply
-      if: github.event_name == 'push'
-      run: terraform apply -auto-approve tfplan
-
-    - name: Terraform Plan Destroy
-      if: github.event_name == 'workflow_dispatch'
-      run: terraform plan -destroy -out=tfplan-destroy
+#    - name: Terraform Apply
+#      if: github.event_name == 'push'
+#      run: terraform apply -auto-approve tfplan
 
     - name: Terraform Destroy
       if: github.event_name == 'workflow_dispatch'
-      run: terraform apply -auto-approve tfplan-destroy
+      run: terraform apply -auto-approve tfplan
