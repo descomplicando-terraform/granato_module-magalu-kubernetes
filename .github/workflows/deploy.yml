@@ -38,12 +38,12 @@ jobs:
     - name: Set Terraform Environment Variables
       run: echo "TF_VAR_mgc_region=${{ secrets.MGC_REGION }}" >> $GITHUB_ENV
 
-#    - name: Terraform Init
-#      run: terraform init
+    - name: Terraform Init
+      run: terraform init
 
-#    - name: Terraform Plan
-#      id: plan
-#      run: terraform plan -out=tfplan
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -out=tfplan
 
 #    - name: Terraform Apply
 #      if: github.event_name == 'push'
