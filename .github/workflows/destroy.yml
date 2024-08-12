@@ -1,8 +1,5 @@
-name: Create infrastructure on Magalu Cloud
+name: Destroy infrastructure on Magalu Cloud
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -30,7 +27,7 @@ jobs:
       run: echo "PATH=$HOME/mgc_cli:$PATH" >> $GITHUB_ENV
 
     - name: Set Terraform Environment Variables
-      run: echo "TF_VAR_mgc_api_key=${{ secrets.MGC_API_KEY }}" >> $GITHUB_ENV
+      run: echo "TF_mgc_api_key=${{ secrets.MGC_API_KEY }}" >> $GITHUB_ENV
     - name: Set Terraform Environment Variables
       run: echo "TF_VAR_mgc_obj_key_id=${{ secrets.MGC_OBJ_KEY_ID }}" >> $GITHUB_ENV
     - name: Set Terraform Environment Variables
@@ -41,13 +38,9 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    - name: Terraform Plan
-      id: plan
-      run: terraform plan -out=tfplan
-
-#    - name: Terraform Apply
-#      if: github.event_name == 'push'
-#      run: terraform apply -auto-approve tfplan
-  
+    - name: Terraform Destroy
+      if: github.event_name == 'workflow_dispatch'
+      run: terraform destroy -auto-approve
+    
     - name: Output
-      run: echo "The infrastructure has been planned"
+      run: echo "The infrastructure has been destroyed"
