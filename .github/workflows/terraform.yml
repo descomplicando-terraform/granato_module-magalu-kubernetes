@@ -1,4 +1,4 @@
-name: Terraform Workflow
+name: Terraform Workflow - Format, Validate, and Test
 
 on:
   push:
@@ -20,9 +20,6 @@ jobs:
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_version: 1.9.3
-
-    - name: Terraform Init
-      run: terraform init --upgrade
 
     - name: Terraform Format
       run: terraform fmt
