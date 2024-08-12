@@ -7,7 +7,7 @@ variable "cluster_name" {
 variable "kubernetes_version" {
   description = "Versão do Kubernetes"
   type        = string
-  default     = "v1.28.5"
+  default     = "v1.28.11"
 }
 
 variable "cluster_description" {
@@ -41,21 +41,21 @@ variable "timer_duration" {
 }
 
 variable "mgc_api_key" {
-  type = string
+  type        = string
   description = "Chave da Magalu Cloud"
 }
 
 variable "mgc_obj_key_id" {
-  type = string
+  type        = string
   description = "ID da Chave do Object Storage"
 }
 
 variable "mgc_obj_key_secret" {
-  type = string
+  type        = string
   description = "Secret da Chave do Object Storage"
 }
 
 variable "mgc_region" {
-  type = string
+  type        = string
   description = "Região da Magalu Cloud"
 }
