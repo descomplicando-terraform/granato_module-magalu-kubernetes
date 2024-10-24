@@ -23,11 +23,11 @@ jobs:
 
     - name: Export environment variables
       run: |
-        export MGC_API_KEY=${{ secrets.MGC_API_KEY }}
-        export MGC_OBJ_KEY_ID=${{ secrets.MGC_OBJ_KEY_ID }}
-        export MGC_OBJ_KEY_SECRET=${{ secrets.MGC_OBJ_KEY_SECRET }}
-        export MGC_REGION=${{ secrets.MGC_REGION }}
-
+        echo "MGC_API_KEY=${{ secrets.MGC_API_KEY }}" >> $GITHUB_ENV
+        echo "MGC_OBJ_KEY_ID=${{ secrets.MGC_OBJ_KEY_ID }}" >> $GITHUB_ENV
+        echo "MGC_OBJ_KEY_SECRET=${{ secrets.MGC_OBJ_KEY_SECRET }}" >> $GITHUB_ENV
+        echo "MGC_REGION=${{ secrets.MGC_REGION }}" >> $GITHUB_ENV
+        echo "MGC_ENV=${{ secrets.MGC_ENV }}" >> $GITHUB_ENV
 
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v2
@@ -35,11 +35,6 @@ jobs:
         terraform_version: 1.9.3
 
     - name: Terraform Init
-      env:
-        MGC_OBJ_KEY_SECRET: ${{ secrets.MGC_OBJ_KEY_SECRET }}
-        MGC_OBJ_KEY_ID: ${{ secrets.MGC_OBJ_KEY_ID }}
-        MGC_REGION: ${{ secrets.MGC_REGION }}
-        MGC_API_KEY: ${{ secrets.MGC_API_KEY }}
       run: terraform init
 
     - name: Terraform Format
