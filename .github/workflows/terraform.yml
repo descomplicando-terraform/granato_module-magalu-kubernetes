@@ -16,6 +16,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Install mgc-cli
+      run: |
+        wget https://github.com/MagaluCloud/mgccli/releases/download/v0.28.4/mgccli_0.28.4_linux_amd64.deb
+        sudo dpkg -i mgccli_0.28.4_linux_amd64.deb
+
+    - name: Export environment variables
+      run: |
+        export MGC_API_KEY=${{ secrets.MGC_API_KEY }}
+        export MGC_OBJ_KEY_ID=${{ secrets.MGC_OBJ_KEY_ID }}
+        export MGC_OBJ_KEY_SECRET=${{ secrets.MGC_OBJ_KEY_SECRET }}
+        export MGC_REGION=${{ secrets.MGC_REGION }}
+
+
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v2
       with:
@@ -26,6 +39,7 @@ jobs:
         MGC_OBJ_KEY_SECRET: ${{ secrets.MGC_OBJ_KEY_SECRET }}
         MGC_OBJ_KEY_ID: ${{ secrets.MGC_OBJ_KEY_ID }}
         MGC_REGION: ${{ secrets.MGC_REGION }}
+        MGC_API_KEY: ${{ secrets.MGC_API_KEY }}
       run: terraform init
 
     - name: Terraform Format
