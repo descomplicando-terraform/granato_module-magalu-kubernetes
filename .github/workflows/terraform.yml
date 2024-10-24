@@ -21,6 +21,12 @@ jobs:
       with:
         terraform_version: 1.9.3
 
+    - name: Terraform Init
+      env:
+        MGC_OBJ_KEY_SECRET: ${{ secrets.MGC_OBJ_KEY_SECRET }}
+        MGC_OBJ_KEY_ID: ${{ secrets.MGC_OBJ_KEY_ID }}
+        MGC_REGION: ${{ secrets.MGC_REGION }}
+      run: terraform init
 
     - name: Terraform Format
       run: terraform fmt -check -recursive -diff
