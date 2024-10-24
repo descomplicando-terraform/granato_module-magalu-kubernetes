@@ -26,7 +26,7 @@ jobs:
         MGC_OBJ_KEY_SECRET: ${{ secrets.MGC_OBJ_KEY_SECRET }}
         MGC_OBJ_KEY_ID: ${{ secrets.MGC_OBJ_KEY_ID }}
         MGC_REGION: ${{ secrets.MGC_REGION }}
-      run: terraform init
+      run: terraform init -backend-config="access_key=$MGC_OBJ_KEY_ID" -backend-config="secret_key=$MGC_OBJ_KEY_SECRET" -backend
 
     - name: Terraform Format
       run: terraform fmt -check -recursive -diff
