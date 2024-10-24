@@ -18,7 +18,7 @@ terraform {
     skip_credentials_validation = true
     skip_requesting_account_id  = true
     skip_s3_checksum            = true
-    endpoints {
+    endpoints = {
       s3 = "https://br-se1.magaluobjects.com/"
     }
   }
