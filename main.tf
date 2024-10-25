@@ -1,15 +1,10 @@
-# Criando um cluster com um nodepool
+# Criando um cluster
 resource "mgc_kubernetes_cluster" "cluster_with_nodepool" {
   name                 = var.cluster_name
   enabled_bastion      = false
   version              = var.kubernetes_version
   enabled_server_group = false
   description          = var.cluster_description
-  node_pools = [{
-    name     = var.nodepool_name
-    replicas = var.nodepool_replicas
-    flavor   = var.nodepool_flavor
-  }]
 }
 
 # Tempo de espera para o cluster ficar ativo
@@ -22,7 +17,7 @@ resource "time_sleep" "wait_15_minutes" {
 # Criando um nodepool
 resource "mgc_kubernetes_nodepool" "gp1_small" {
   depends_on = [time_sleep.wait_15_minutes] # Wait timer
-  name       = "apis-2cpu-4gb-20gb"
+  name       = var.nodepool_name
   cluster_id = mgc_kubernetes_cluster.cluster_with_nodepool.id
   flavor     = var.nodepool_flavor
   replicas   = var.nodepool_replicas
