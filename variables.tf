@@ -59,3 +59,8 @@ variable "mgc_region" {
   type        = string
   description = "Região da Magalu Cloud"
 }
+
+variable "nodepool_flavor_name" {
+  description = "The flavor name for the Kubernetes nodepool"
+  type        = string
+}
