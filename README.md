@@ -1,4 +1,6 @@
-# terraform-mgc-k8s-module
+# Módulo Terraform para criação de clusters Kubernetes na Magalu Cloud
+
+Um módulo Terraform para a criação de clusters Kubernetes na Magalu Cloud.
 
 [![Verificar código Terraform com tfsec](https://github.com/descomplicando-terraform/granato_module-magalu-kubernetes/actions/workflows/tfscan.yml/badge.svg)](https://github.com/descomplicando-terraform/granato_module-magalu-kubernetes/actions/workflows/tfscan.yml)
 <!-- BEGIN_TF_DOCS -->
@@ -19,6 +21,24 @@ flowchart TD;
   time_sleep.wait_for_cluster --> mgc_kubernetes_cluster.cluster_with_nodepool
  end
 ```
+
+## Como Usar
+
+1. Adicione o módulo ao seu arquivo `main.tf`:
+
+   ```hcl
+   module "magalu_kubernetes_cluster" {
+     source  = "github.com/descomplicando-terraform/granato_module-magalu-kubernetes?ref=v1.0.0"
+     
+     cluster_name        = "seu_cluster_name"
+     cluster_description = "descrição do seu cluster"
+     kubernetes_version  = "v1.28.5"
+     nodepool_name       = "seu_nodepool_name"
+     nodepool_flavor     = "cloud-k8s.gp1.small"
+     nodepool_replicas   = 1
+     timer_duration      = "15m"
+   }
+   ```
 
 ## Requirements
 
