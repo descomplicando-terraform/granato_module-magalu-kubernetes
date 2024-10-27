@@ -7,7 +7,7 @@ variable "cluster_name" {
 variable "kubernetes_version" {
   description = "Versão do Kubernetes"
   type        = string
-  default     = "v1.28.11"
+  default     = "v1.30.2"
 }
 
 variable "cluster_description" {
@@ -31,13 +31,13 @@ variable "nodepool_replicas" {
 variable "nodepool_flavor" {
   description = "Flavor do Nodepool"
   type        = string
-  default     = "cloud-k8s.gp1.small"
+  default     = "cloud-bs1.xsmall"
 }
 
 variable "timer_duration" {
   description = "Duração do Timer"
   type        = string
-  default     = "15m"
+  default     = "5m"
 }
 
 variable "mgc_api_key" {
@@ -58,9 +58,11 @@ variable "mgc_obj_key_secret" {
 variable "mgc_region" {
   type        = string
   description = "Região da Magalu Cloud"
+  default     = "br-se1"
 }
 
 variable "nodepool_flavor_name" {
   description = "The flavor name for the Kubernetes nodepool"
   type        = string
+  default     = "cloud-bs1-xsmall"
 }
