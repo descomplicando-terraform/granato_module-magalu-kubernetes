@@ -8,25 +8,37 @@ resource "mgc_kubernetes_cluster" "cluster_with_nodepool" {
 
 # Tempo de espera para o cluster ficar ativo
 # Ajuste o tempo conforme necessário
-resource "time_sleep" "wait_15_minutes" {
+resource "time_sleep" "wait_5_minutes" {
   depends_on      = [mgc_kubernetes_cluster.cluster_with_nodepool]
   create_duration = var.timer_duration
 }
 
+resource "random_string" "this" {
+  length  = 8
+  special = false
+  upper   = false
+  numeric = true # Atualizado para usar `numeric`
+}
+
 # Criando um nodepool
-resource "mgc_kubernetes_nodepool" "gp1_small" {
-  depends_on  = [time_sleep.wait_15_minutes] # Wait timer
-  name        = var.nodepool_name
-  cluster_id  = mgc_kubernetes_cluster.cluster_with_nodepool.id
-  flavor_name = var.nodepool_flavor_name
-  replicas    = var.nodepool_replicas
-  # auto_scale attribute is not supported
+resource "mgc_kubernetes_nodepool" "nataliagranato" {
+  depends_on   = [time_sleep.wait_5_minutes]
+  name         = "${mgc_kubernetes_cluster.cluster_with_nodepool.name}-nodepool-${random_string.this.result}"
+  cluster_id   = mgc_kubernetes_cluster.cluster_with_nodepool.id
+  flavor_name  = var.node_pools.default.flavor
+  replicas     = var.node_pools.default.min_replicas
+  min_replicas = var.node_pools.default.min_replicas
+  max_replicas = var.node_pools.default.max_replicas
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Timer para esperar o cluster ficar ativo
 resource "time_sleep" "wait_for_cluster" {
   depends_on      = [mgc_kubernetes_cluster.cluster_with_nodepool]
-  create_duration = "10m" # Ajuste o tempo conforme necessário
+  create_duration = "5m" # Ajuste o tempo conforme necessário
 }
 
 # Pegar o kubeconfig do cluster usando o output do cluster_id
