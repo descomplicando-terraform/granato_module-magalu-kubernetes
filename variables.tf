@@ -16,24 +16,6 @@ variable "cluster_description" {
   default     = "Um cluster de Kubernetes gerenciado pela Magalu Cloud."
 }
 
-variable "nodepool_name" {
-  description = "Nome do Nodepool"
-  type        = string
-  default     = "nataliagranato"
-}
-
-variable "nodepool_replicas" {
-  description = "Número de Réplicas do Nodepool"
-  type        = number
-  default     = 1
-}
-
-variable "nodepool_flavor" {
-  description = "Flavor do Nodepool"
-  type        = string
-  default     = "cloud-bs1.xsmall"
-}
-
 variable "timer_duration" {
   description = "Duração do Timer"
   type        = string
@@ -61,8 +43,22 @@ variable "mgc_region" {
   default     = "br-se1"
 }
 
-variable "nodepool_flavor_name" {
-  description = "The flavor name for the Kubernetes nodepool"
-  type        = string
-  default     = "cloud-bs1-xsmall"
+variable "node_pools" {
+  description = "Mapa de Node Pools"
+  type = map(object({
+    flavor       = string
+    min_replicas = number
+    max_replicas = number
+  }))
+  default = {
+    default = {
+      flavor       = "cloud-k8s.gp1.medium"
+      min_replicas = 2
+      max_replicas = 5
+    }
+  }
+  validation {
+    condition     = alltrue([for np in var.node_pools : np.min_replicas < np.max_replicas])
+    error_message = "min_replicas deve ser menor que max_replicas para todos os pools de nós."
+  }
 }

@@ -13,13 +13,26 @@ resource "time_sleep" "wait_5_minutes" {
   create_duration = var.timer_duration
 }
 
+resource "random_string" "this" {
+  length  = 8
+  special = false
+  upper   = false
+  numeric = true # Atualizado para usar `numeric`
+}
+
 # Criando um nodepool
-resource "mgc_kubernetes_nodepool" "cloud-bs1-xsmall" {
-  depends_on  = [time_sleep.wait_5_minutes] # Wait timer
-  name        = var.nodepool_name
-  cluster_id  = mgc_kubernetes_cluster.cluster_with_nodepool.id
-  flavor_name = var.nodepool_flavor_name
-  replicas    = var.nodepool_replicas
+resource "mgc_kubernetes_nodepool" "nataliagranato" {
+  depends_on   = [time_sleep.wait_5_minutes]
+  name         = "${mgc_kubernetes_cluster.cluster_with_nodepool.name}-nodepool-${random_string.this.result}"
+  cluster_id   = mgc_kubernetes_cluster.cluster_with_nodepool.id
+  flavor_name  = var.node_pools.default.flavor
+  replicas     = var.node_pools.default.min_replicas
+  min_replicas = var.node_pools.default.min_replicas
+  max_replicas = var.node_pools.default.max_replicas
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Timer para esperar o cluster ficar ativo
