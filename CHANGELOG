@@ -1,17 +1,46 @@
-# Changelog
+# CHANGELOG
 
-Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
-
+## [v1.1.0] - 2025-03-22
 ### Adicionado
-
-- Nenhuma adição até o momento.
+- Atualização do provider Magalu Cloud de `0.23.0` para `0.24.0`.
+- Atualização do provider Local de `2.5.2` para `2.6.0`.
+- Atualização do provider Time de `0.12.0` para `0.13.0`.
+- Implementação de balanceamento de carga automático para os clusters.
+- Adição de suporte para configuração de auto-scaling nos nodepools.
+- Melhorias na coleta e armazenamento do kubeconfig.
+- Atualização do README.md com novas instruções de uso e exemplos.
+- Inclusão de documentação detalhada sobre as novas funcionalidades e configurações.
 
 ### Corrigido
+- Correção de problemas na criação de nodepools com nomes duplicados.
+- Ajustes nas permissões para operações de leitura/escrita no Magalu Cloud.
 
-- Nenhuma correção até o momento.
+### Contribuidores
+- @nataliagranato
+- @dependabot
 
-### Alterado
+### Como Usar
+1. Clone o repositório.
+2. Configure as variáveis necessárias no `terraform.tfvars`.
+3. Faça a autenticação em sua conta Magalu Cloud utilizando `mgc auth login` ou via chaves de API.
 
-- Nenhuma alteração até o momento.
+## [v1.0.0] - 2024-11-04
+### Adicionado
+- Criação de clusters Kubernetes gerenciados utilizando o recurso `mgc_kubernetes_cluster`.
+- Criação de nodepools utilizando o recurso `mgc_kubernetes_nodepool`.
+- Implementação de recursos de espera para garantir que os clusters e nodepools estejam ativos antes de outras operações.
+- Coleta e armazenamento do kubeconfig do cluster localmente.
 
-## [1.0.0] - 2024-10-24
+### Melhorias e Novos Recursos:
+- Integração com Magalu Cloud, mgcli e Docker.
+
+### Atualizações de Dependências:
+- Bump magalucloud/mgc from 0.21.1 to 0.23.0.
+- Bump hashicorp/local from 2.5.1 to 2.5.2.
+
+### Documentação:
+- Atualização do README.md com informações de uso do módulo.
+
+### Contribuidores
+- @nataliagranato
+- @dependabot
