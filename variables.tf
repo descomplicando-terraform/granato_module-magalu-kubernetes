@@ -34,8 +34,8 @@ variable "nodepool_flavor_name" {
   default     = "cloud-k8s.gp1.small"
 }
 
-variable "timer_duration" {
-  description = "Timer duration"
-  type        = string
-  default     = "15m"
+variable "enabled_server_group" {
+  description = "Habilitar ou desabilitar o server group no cluster"
+  type        = bool
+  default     = false
 }
