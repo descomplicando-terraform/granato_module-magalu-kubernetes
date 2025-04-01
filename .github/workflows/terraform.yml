@@ -22,7 +22,7 @@ jobs:
         terraform_version: 1.9.3
 
     - name: Terraform Init
-      run: terraform init
+      run: terraform init -upgrade
 
     - name: Terraform Format
       run: terraform fmt -check -recursive -diff
